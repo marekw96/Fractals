@@ -1,7 +1,7 @@
 #include <SDL.h>
-#include <stdio.h>
+#include <iostream>
 
-#include "RectangleOutline.hpp"
+#include "RectOutline.hpp"
 
 // Screen (rendering/display surface) dimensions
 const int SCREEN_WIDTH = 1024;
@@ -13,7 +13,7 @@ int main(int argc, char* args[]) {
 	SDL_Renderer* renderer = NULL;
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+		std::cerr << "SDL could not initialize! SDL_Error:" << SDL_GetError() << std::endl;
 	}
 	else {
 		window = SDL_CreateWindow("Markowy Fraktal",
@@ -21,7 +21,7 @@ int main(int argc, char* args[]) {
 			SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN
 		);
 		if (window == NULL) {
-			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			std::cerr << "Window could not be created! SDL_Error:" << SDL_GetError() << std::endl;
 		}
 		else {
 			screen = SDL_GetWindowSurface(window);
@@ -34,12 +34,14 @@ int main(int argc, char* args[]) {
 			double size = std::fmin(SCREEN_WIDTH, SCREEN_HEIGHT);
 			int start_x = SCREEN_WIDTH /2;
 			int start_y = SCREEN_HEIGHT /2;
+			int rotation_angle = 45;
+			int iterations = 15;
 
-			for (int i = 1; i <= 15; ++i)
+			for (int i = 1; i <= iterations; ++i)
 			{
 				RectOutline rect(start_x, start_y, static_cast<int>(size), static_cast<int>(size));
 				if (i % 2 == 0)
-					rect.rotateByCenter(45);
+					rect.rotateByCenter(rotation_angle);
 				rect.drawOn(renderer);
 				
 				size = std::sqrt(2 * (0.5 * size) *(0.5 * size));
