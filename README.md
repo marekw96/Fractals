@@ -1,0 +1,1 @@
+![Self similar squares](Images/SelfSimilarSquares.png)

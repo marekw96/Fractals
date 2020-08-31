@@ -12,9 +12,7 @@ public:
 	{}
 
 	void rotateByCenter(int angle);
-
 	void rotateByPoint(const Point& point, int angle);
-
 	void drawOn(SDL_Renderer* renderer);
 
 private:
