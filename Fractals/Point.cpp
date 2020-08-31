@@ -7,11 +7,16 @@
 void Point::rotateBy(const Point & other, int angle)
 {
 	//https://gamefromscratch.com/gamedev-math-recipes-rotating-one-point-around-another-point/
-	float angle_rad = (M_PI / 180) * angle; // to radians
+	auto angle_rad = (M_PI / 180) * angle; // to radians
 
 	auto rotatedX = std::cos(angle_rad) * (x - other.x) - std::sin(angle_rad) * (y - other.y) + other.x;
 	auto rotatedY = std::sin(angle_rad) * (x - other.x) + std::cos(angle_rad) * (y - other.y) + other.y;
 
 	x = static_cast<int>(rotatedX);
 	y = static_cast<int>(rotatedY);
+}
+
+SDL_Point Point::toSDL() const
+{
+	return { x, y };
 }
