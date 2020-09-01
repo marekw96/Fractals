@@ -16,6 +16,14 @@ void Point::rotateBy(const Point & other, int angle)
 	y = static_cast<int>(rotatedY);
 }
 
+Point& Point::moveBy(int x, int y)
+{
+	this->x += x;
+	this->y += y;
+
+	return *this;
+}
+
 SDL_Point Point::toSDL() const
 {
 	return { x, y };

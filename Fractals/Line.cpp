@@ -21,3 +21,13 @@ void Line::drawOn(SDL_Renderer * renderer)
 
 	SDL_RenderDrawLines(renderer, points, POINTS);
 }
+
+const Point & Line::getStart() const
+{
+	return start;
+}
+
+const Point & Line::getEnd() const
+{
+	return end;
+}
