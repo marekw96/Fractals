@@ -68,6 +68,11 @@ int main(int argc, char* args[]) {
 					else if (event.type == SDL_KEYUP)
 					{
 						changeStageIfNeeded(currentStage, stages, event.key.keysym.sym);
+						if (event.key.keysym.sym == SDLK_ESCAPE)
+						{
+							SDL_Quit();
+							exit(1);
+						}
 					}
 				}
 
