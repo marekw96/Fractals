@@ -13,6 +13,18 @@
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 1024;
 
+void changeStageIfNeeded(IStage*& current, const std::vector<IStage*>& stages, int key)
+{
+	int stageId = key - SDLK_1;
+
+	if (stageId < 0 || stageId >= stages.size())
+		return;
+
+	current->cleanup();
+	current = stages[stageId];
+	current->initialize();
+}
+
 int main(int argc, char* args[]) {
 	SDL_Window* window = NULL;
 	SDL_Surface* screen = NULL;
@@ -22,7 +34,7 @@ int main(int argc, char* args[]) {
 	SelfSimilarSquares squaresStage{};
 	CantorSet cantorSet{};
 
-	IStage* stages[] = {&fibStage, &squaresStage, &cantorSet};
+	std::vector<IStage*> stages = { &fibStage, &squaresStage, &cantorSet };
 	IStage* currentStage = stages[0];
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -55,24 +67,7 @@ int main(int argc, char* args[]) {
 					}
 					else if (event.type == SDL_KEYUP)
 					{
-						switch (event.key.keysym.sym)
-						{
-						case SDLK_1:
-							currentStage->cleanup();
-							currentStage = stages[0];
-							currentStage->initialize();
-							break;
-						case SDLK_2:
-							currentStage->cleanup();
-							currentStage = stages[1];
-							currentStage->initialize();
-							break;
-						case SDLK_3:
-							currentStage->cleanup();
-							currentStage = stages[2];
-							currentStage->initialize();
-							break;
-						}
+						changeStageIfNeeded(currentStage, stages, event.key.keysym.sym);
 					}
 				}
 
