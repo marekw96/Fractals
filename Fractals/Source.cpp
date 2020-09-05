@@ -4,8 +4,10 @@
 
 #include "RectOutline.hpp"
 #include "IStage.hpp"
+
 #include "FibonacciTreeFractal.hpp"
 #include "SelfSimilarSquares.hpp"
+#include "CantorSet.hpp"
 
 // Screen (rendering/display surface) dimensions
 const int SCREEN_WIDTH = 1024;
@@ -18,8 +20,9 @@ int main(int argc, char* args[]) {
 
 	FibonacciTreeFractal fibStage{};
 	SelfSimilarSquares squaresStage{};
+	CantorSet cantorSet{};
 
-	IStage* stages[] = {&fibStage, &squaresStage};
+	IStage* stages[] = {&fibStage, &squaresStage, &cantorSet};
 	IStage* currentStage = stages[0];
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -62,6 +65,11 @@ int main(int argc, char* args[]) {
 						case SDLK_2:
 							currentStage->cleanup();
 							currentStage = stages[1];
+							currentStage->initialize();
+							break;
+						case SDLK_3:
+							currentStage->cleanup();
+							currentStage = stages[2];
 							currentStage->initialize();
 							break;
 						}

@@ -19,7 +19,9 @@ public:
 
 	void rotateByCenter(int angle);
 	void rotateByPoint(const Point& point, int angle);
-	void drawOn(SDL_Renderer* renderer);
+	void drawOn(SDL_Renderer* renderer) const;
+	int getLength() const;
+	Line& moveBy(int x, int y);
 
 	const Point& getStart() const;
 	const Point& getEnd() const;

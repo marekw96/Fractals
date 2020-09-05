@@ -9,6 +9,7 @@ public:
 
 	void rotateBy(const Point& other, int angle);
 	Point& moveBy(int x, int y);
+	int distanceTo(const Point& other) const;
 	SDL_Point toSDL() const;
 
 	int x;

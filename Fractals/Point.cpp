@@ -24,6 +24,11 @@ Point& Point::moveBy(int x, int y)
 	return *this;
 }
 
+int Point::distanceTo(const Point& other) const
+{
+	return static_cast<int>(std::sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y)));
+}
+
 SDL_Point Point::toSDL() const
 {
 	return { x, y };
