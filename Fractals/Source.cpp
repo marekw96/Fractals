@@ -8,6 +8,7 @@
 #include "FibonacciTreeFractal.hpp"
 #include "SelfSimilarSquares.hpp"
 #include "CantorSet.hpp"
+#include "MandelbrotSet.hpp"
 
 // Screen (rendering/display surface) dimensions
 const int SCREEN_WIDTH = 1024;
@@ -33,9 +34,10 @@ int main(int argc, char* args[]) {
 	FibonacciTreeFractal fibStage{};
 	SelfSimilarSquares squaresStage{};
 	CantorSet cantorSet{};
+	MandelbrotSet mandelbrotSet{};
 
-	std::vector<IStage*> stages = { &fibStage, &squaresStage, &cantorSet };
-	IStage* currentStage = stages[0];
+	std::vector<IStage*> stages = { &fibStage, &squaresStage, &cantorSet, &mandelbrotSet };
+	IStage* currentStage = stages[3];
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		std::cerr << "SDL could not initialize! SDL_Error:" << SDL_GetError() << std::endl;
