@@ -1,15 +1,15 @@
 #include "MandelbrotSet.hpp"
 
-#include "Complex.hpp"
+#include <complex>
 
 constexpr auto MAX_ITERATIONS = 80;
 
-int mandelbrot(const Complex& c)
+int mandelbrot(const std::complex<float>& c)
 {
-	Complex z;
+	std::complex<float> z;
 	int iterations = 0;
 
-	while (z.abs() <= 2 && iterations < MAX_ITERATIONS)
+	while (std::abs(z) <= 2 && iterations < MAX_ITERATIONS)
 	{
 		z = z * z + c;
 		++iterations;
@@ -32,7 +32,7 @@ void MandelbrotSet::draw(int width, int height, SDL_Renderer * renderer)
 	{
 		for (int x = 0; x < width; ++x)
 		{
-			Complex c(r_start + x * r_step, i_start + y * i_step);
+			std::complex<float> c(r_start + x * r_step, i_start + y * i_step);
 			auto m = mandelbrot(c);
 			auto color = 255 - (m * 255 / MAX_ITERATIONS);
 
