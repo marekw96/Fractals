@@ -1,6 +1,7 @@
 #include <SDL.h>
 
 #include <iostream>
+#include <string>
 
 #include "IStage.hpp"
 
@@ -47,10 +48,16 @@ int main()
 
     for(IStage* stage: stages)
     {
+        std::string name = stage->name();
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
+        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
         stage->initialize();
 		stage->draw(SCREEN_WIDTH, SCREEN_HEIGHT, renderer);
 		SDL_RenderPresent(renderer);
-        SDL_SaveBMP(screen, "DUPA.bmp");
+        SDL_SaveBMP(screen, (name + ".BMP").c_str());
         stage->cleanup();
     }
 

@@ -14,6 +14,7 @@ public:
 	void initialize() {}
 	void draw(int screen_width, int screen_height, SDL_Renderer* renderer);
 	void cleanup() {};
+    const char* name() { return "FibonacciTreeFractal"; }
 
 private:
 };
